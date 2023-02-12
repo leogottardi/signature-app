@@ -31,14 +31,10 @@ export class UserController {
   getUser(@Param('id') id: string): User {
     try {
       return this.getUserService.handler({ id })
-    } catch (err) {
-      console.log(err)
+    } catch (error) {
       throw new HttpException(
-        {
-          error: err,
-          status: HttpStatus.NOT_FOUND
-        },
-        HttpStatus.NOT_FOUND
+        error.message,
+        error.code || HttpStatus.INTERNAL_SERVER_ERROR
       )
     }
   }
