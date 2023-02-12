@@ -7,6 +7,12 @@ import { UserRepository } from 'src/infrastructure/repositories/user'
 @Module({
   controllers: [UserController],
   providers: [
+    // Repositories
+    {
+      provide: TYPES.UserRepository,
+      useClass: UserRepository
+    },
+    // Services
     {
       provide: TYPES.CreateUserService,
       useClass: CreateUserService
@@ -14,10 +20,6 @@ import { UserRepository } from 'src/infrastructure/repositories/user'
     {
       provide: TYPES.GetUserService,
       useClass: GetUserService
-    },
-    {
-      provide: TYPES.UserRepository,
-      useClass: UserRepository
     }
   ]
 })
