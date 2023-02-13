@@ -10,32 +10,36 @@ import {
   Post
 } from '@nestjs/common'
 import { IPresentation } from 'src/domain/common/interfaces'
-import { User } from 'src/domain/user/entities/user'
-import { ICreateUser, IDeleteUser, IGetUser } from 'src/domain/user/interfaces'
+import { Subscriber } from 'src/domain/subscriber/entities/subscriber'
+import {
+  ICreateSubscriber,
+  IDeleteSubscriber,
+  IGetSubscriber
+} from 'src/domain/subscriber/interfaces'
 import { TYPES } from 'src/infrastructure/crosscutting/types'
 
 @Controller('users')
 export class UserController {
   constructor(
-    @Inject(TYPES.CreateUserPresentation)
+    @Inject(TYPES.CreateSubscriberPresentation)
     private readonly createUserPresentation: IPresentation<
-      ICreateUser,
-      Promise<User>
+      ICreateSubscriber,
+      Promise<Subscriber>
     >,
-    @Inject(TYPES.GetUserPresentation)
+    @Inject(TYPES.GetSubscriberPresentation)
     private readonly getUserPresentation: IPresentation<
-      IGetUser,
-      Promise<User>
+      IGetSubscriber,
+      Promise<Subscriber>
     >,
-    @Inject(TYPES.DeleteUserPresentation)
+    @Inject(TYPES.DeleteSubscriberPresentation)
     private readonly deleteUserPresentation: IPresentation<
-      IDeleteUser,
+      IDeleteSubscriber,
       Promise<void>
     >
   ) {}
 
   @Post()
-  async createUser(@Body() params: ICreateUser): Promise<User> {
+  async createUser(@Body() params: ICreateSubscriber): Promise<Subscriber> {
     try {
       return await this.createUserPresentation.handler(params)
     } catch (error) {
@@ -47,7 +51,7 @@ export class UserController {
   }
 
   @Get(':id')
-  async getUser(@Param('id') id: string): Promise<User> {
+  async getUser(@Param('id') id: string): Promise<Subscriber> {
     try {
       return await this.getUserPresentation.handler({ id })
     } catch (error) {

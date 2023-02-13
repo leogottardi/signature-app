@@ -1,19 +1,22 @@
-import { DeleteUserService } from '@app/user'
-import { User } from '@domain/user/entities/user'
-import { IDeleteUser, IUserRepository } from '@domain/user/interfaces'
+import { DeleteSubscriberService } from '@app/subscriber'
+import { Subscriber } from '@domain/subscriber/entities/subscriber'
+import {
+  IDeleteSubscriber,
+  ISubscriberRepository
+} from '@domain/subscriber/interfaces'
 
-describe('DeleteUserService', () => {
-  const user_repository: IUserRepository = {
-    insert: jest.fn().mockImplementation((user: User) => {
-      return user
+describe('DeleteSubscriberService', () => {
+  const user_repository: ISubscriberRepository = {
+    insert: jest.fn().mockImplementation((subscriber: Subscriber) => {
+      return subscriber
     }),
     get: jest.fn(),
     delete: jest.fn()
   }
-  const service = new DeleteUserService(user_repository)
+  const service = new DeleteSubscriberService(user_repository)
 
-  it('should be delete a user', async () => {
-    const input: IDeleteUser = {
+  it('should be delete a subscriber', async () => {
+    const input: IDeleteSubscriber = {
       id: 'test-id'
     }
     await service.handler(input)

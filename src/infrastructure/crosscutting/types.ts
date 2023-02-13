@@ -2,13 +2,13 @@ export const TYPES = {
   // Commons
   PrismaConnection: Symbol.for('PrismaConnection'),
   // Repositories
-  UserRepository: Symbol.for('UserRepositry'),
+  SubscriberRepository: Symbol.for('UserRepositry'),
   // Services
-  CreateUserService: Symbol.for('CreateUserService'),
-  GetUserService: Symbol.for('GetUserService'),
-  DeleteUserService: Symbol.for('DeleteUserService'),
+  CreateSubscriberService: Symbol.for('CreateSubscriberService'),
+  GetSubscriberService: Symbol.for('GetSubscriberService'),
+  DeleteSubscriberService: Symbol.for('DeleteSubscriberService'),
   // Presentations
-  CreateUserPresentation: Symbol.for('CreateUserPresentation'),
-  GetUserPresentation: Symbol.for('GetUserPresentation'),
-  DeleteUserPresentation: Symbol.for('DeleteUserPresentation')
+  CreateSubscriberPresentation: Symbol.for('CreateSubscriberPresentation'),
+  GetSubscriberPresentation: Symbol.for('GetSubscriberPresentation'),
+  DeleteSubscriberPresentation: Symbol.for('DeleteSubscriberPresentation')
 }

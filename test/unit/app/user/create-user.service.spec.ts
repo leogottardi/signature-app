@@ -1,25 +1,28 @@
-import { CreateUserService } from '@app/user'
-import { User } from '@domain/user/entities/user'
-import { ICreateUser, IUserRepository } from '@domain/user/interfaces'
+import { CreateSubscriberService } from '@app/subscriber'
+import { Subscriber } from '@domain/subscriber/entities/subscriber'
+import {
+  ICreateSubscriber,
+  ISubscriberRepository
+} from '@domain/subscriber/interfaces'
 
-describe('CreateUserService', () => {
-  const user_repository: IUserRepository = {
-    insert: jest.fn().mockImplementation((user: User) => {
-      return user
+describe('CreateSubscriberService', () => {
+  const user_repository: ISubscriberRepository = {
+    insert: jest.fn().mockImplementation((subscriber: Subscriber) => {
+      return subscriber
     }),
     get: jest.fn(),
     delete: jest.fn()
   }
-  const service = new CreateUserService(user_repository)
+  const service = new CreateSubscriberService(user_repository)
 
-  it('should be create a user', async () => {
-    const input: ICreateUser = {
+  it('should be create a subscriber', async () => {
+    const input: ICreateSubscriber = {
       name: 'test-name',
       document: '123456789',
       email: 'test@test.com'
     }
-    const user = await service.handler(input)
-    expect(user).toMatchObject(input)
+    const subscriber = await service.handler(input)
+    expect(subscriber).toMatchObject(input)
     expect(user_repository.insert).toBeCalled()
   })
 })
