@@ -2,9 +2,9 @@ import { User } from 'src/domain/user/entities/user'
 import { Inject } from '@nestjs/common'
 import { TYPES } from 'src/infrastructure/crosscutting/types'
 import { PrismaClient } from 'prisma/prisma-client'
-import { IGetUser } from 'src/domain/user/interfaces'
+import { IGetUser, IUserRepository } from 'src/domain/user/interfaces'
 
-export class UserRepository {
+export class UserRepository implements IUserRepository {
   constructor(
     @Inject(TYPES.PrismaConnection)
     private readonly connection: PrismaClient

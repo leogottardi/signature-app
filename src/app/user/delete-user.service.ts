@@ -1,13 +1,12 @@
 import { Inject } from '@nestjs/common'
-import { IService } from 'src/domain/common/interfaces'
-import { IDeleteUser } from 'src/domain/user/interfaces'
-import { TYPES } from 'src/infrastructure/crosscutting/types'
-import { UserRepository } from 'src/infrastructure/databases/prisma/repositories/user'
+import { IService } from '@domain/common/interfaces'
+import { IDeleteUser, IUserRepository } from '@domain/user/interfaces'
+import { TYPES } from '@infrastructure/crosscutting/types'
 
 export class DeleteUserService implements IService<IDeleteUser, void> {
   constructor(
     @Inject(TYPES.UserRepository)
-    private readonly userRepository: UserRepository
+    private readonly userRepository: IUserRepository
   ) {}
 
   handler({ id }: IDeleteUser): void {
