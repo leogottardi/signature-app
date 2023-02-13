@@ -18,7 +18,7 @@ import { TYPES } from 'src/infrastructure/crosscutting/types'
 export class UserController {
   constructor(
     @Inject(TYPES.CreateUserService)
-    private readonly createUserService: IService<ICreateUser, User>,
+    private readonly createUserService: IService<ICreateUser, Promise<User>>,
     @Inject(TYPES.GetUserService)
     private readonly getUserService: IService<IGetUser, User>,
     @Inject(TYPES.DeleteUserService)
@@ -26,8 +26,8 @@ export class UserController {
   ) {}
 
   @Post()
-  createUser(@Body() params: ICreateUser): User {
-    return this.createUserService.handler(params)
+  async createUser(@Body() params: ICreateUser): Promise<User> {
+    return await this.createUserService.handler(params)
   }
 
   @Get(':id')

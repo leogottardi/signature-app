@@ -4,7 +4,7 @@ import { User } from 'src/domain/user/entities/user'
 import { UserNotFoundError } from 'src/domain/user/errors'
 import { IGetUser } from 'src/domain/user/interfaces'
 import { TYPES } from 'src/infrastructure/crosscutting/types'
-import { UserRepository } from 'src/infrastructure/repositories/user'
+import { UserRepository } from 'src/infrastructure/databases/prisma/repositories/user'
 
 export class GetUserService implements IService<IGetUser, User> {
   constructor(

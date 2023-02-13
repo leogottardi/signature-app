@@ -6,9 +6,11 @@ import {
   DeleteUserService
 } from 'src/app/user'
 import { TYPES } from 'src/infrastructure/crosscutting/types'
-import { UserRepository } from 'src/infrastructure/repositories/user'
+import { UserRepository } from 'src/infrastructure/databases/prisma/repositories/user'
+import { IOCModule } from '../common/ioc.module'
 
 @Module({
+  imports: [IOCModule],
   controllers: [UserController],
   providers: [
     // Repositories
