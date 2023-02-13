@@ -9,7 +9,7 @@ import {
   Param,
   Post
 } from '@nestjs/common'
-import { IService } from 'src/domain/common/interfaces'
+import { IPresentation, IService } from 'src/domain/common/interfaces'
 import { User } from 'src/domain/user/entities/user'
 import { ICreateUser, IDeleteUser, IGetUser } from 'src/domain/user/interfaces'
 import { TYPES } from 'src/infrastructure/crosscutting/types'
@@ -17,23 +17,33 @@ import { TYPES } from 'src/infrastructure/crosscutting/types'
 @Controller('users')
 export class UserController {
   constructor(
-    @Inject(TYPES.CreateUserService)
-    private readonly createUserService: IService<ICreateUser, Promise<User>>,
+    @Inject(TYPES.CreateUserPresentation)
+    private readonly createUserPresentation: IPresentation<
+      ICreateUser,
+      Promise<User>
+    >,
     @Inject(TYPES.GetUserService)
-    private readonly getUserService: IService<IGetUser, User>,
+    private readonly getUserService: IService<IGetUser, Promise<User>>,
     @Inject(TYPES.DeleteUserService)
     private readonly deleteUserService: IService<IDeleteUser, void>
   ) {}
 
   @Post()
   async createUser(@Body() params: ICreateUser): Promise<User> {
-    return await this.createUserService.handler(params)
+    try {
+      return await this.createUserPresentation.handler(params)
+    } catch (error) {
+      throw new HttpException(
+        error.message,
+        error.code || HttpStatus.INTERNAL_SERVER_ERROR
+      )
+    }
   }
 
   @Get(':id')
-  getUser(@Param('id') id: string): User {
+  async getUser(@Param('id') id: string): Promise<User> {
     try {
-      return this.getUserService.handler({ id })
+      return await this.getUserService.handler({ id })
     } catch (error) {
       throw new HttpException(
         error.message,
@@ -43,7 +53,7 @@ export class UserController {
   }
 
   @Delete(':id')
-  deleteUser(@Param('id') id: string): void {
+  async deleteUser(@Param('id') id: string): Promise<void> {
     this.deleteUserService.handler({ id })
   }
 }

@@ -4,6 +4,8 @@ CREATE TABLE "user" (
     "name" VARCHAR(50) NOT NULL,
     "email" VARCHAR(50) NOT NULL,
     "document" VARCHAR(20) NOT NULL,
+    "created_at" TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(0),
 
     CONSTRAINT "user_pkey" PRIMARY KEY ("id")
 );

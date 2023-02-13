@@ -7,7 +7,7 @@ export class User {
   email: string
   document: string
   created_at = new Date()
-  updated_At: Date
+  updated_at?: Date
 
   static create(props: ICreateUser): User {
     const user = new User()

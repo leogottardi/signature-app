@@ -8,6 +8,7 @@ import {
 import { TYPES } from 'src/infrastructure/crosscutting/types'
 import { UserRepository } from 'src/infrastructure/databases/prisma/repositories/user'
 import { IOCModule } from '../common/ioc.module'
+import { CreateUserPresentation } from 'src/presentation/user/create-user.presentation'
 
 @Module({
   imports: [IOCModule],
@@ -30,6 +31,11 @@ import { IOCModule } from '../common/ioc.module'
     {
       provide: TYPES.DeleteUserService,
       useClass: DeleteUserService
+    },
+    // Presentations
+    {
+      provide: TYPES.CreateUserPresentation,
+      useClass: CreateUserPresentation
     }
   ]
 })

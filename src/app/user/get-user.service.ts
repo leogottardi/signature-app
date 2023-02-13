@@ -6,14 +6,13 @@ import { IGetUser } from 'src/domain/user/interfaces'
 import { TYPES } from 'src/infrastructure/crosscutting/types'
 import { UserRepository } from 'src/infrastructure/databases/prisma/repositories/user'
 
-export class GetUserService implements IService<IGetUser, User> {
+export class GetUserService implements IService<IGetUser, Promise<User>> {
   constructor(
     @Inject(TYPES.UserRepository)
     private readonly userRepository: UserRepository
   ) {}
-  handler(params: IGetUser): User {
-    const user = this.userRepository.get(params.id)
-    if (!user) throw new UserNotFoundError()
-    return user
+
+  async handler(params: IGetUser): Promise<User> {
+    return await this.userRepository.get(params)
   }
 }
