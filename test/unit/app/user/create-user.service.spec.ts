@@ -19,7 +19,7 @@ describe('CreateUserService', () => {
       email: 'test@test.com'
     }
     const user = await service.handler(input)
-
     expect(user).toMatchObject(input)
+    expect(user_repository.insert).toBeCalled()
   })
 })
