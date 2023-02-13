@@ -8,5 +8,6 @@ export const TYPES = {
   GetUserService: Symbol.for('GetUserService'),
   DeleteUserService: Symbol.for('DeleteUserService'),
   // Presentations
-  CreateUserPresentation: Symbol.for('CreateUserPresentation')
+  CreateUserPresentation: Symbol.for('CreateUserPresentation'),
+  GetUserPresentation: Symbol.for('GetUserPresentation')
 }

@@ -9,6 +9,7 @@ import { TYPES } from 'src/infrastructure/crosscutting/types'
 import { UserRepository } from 'src/infrastructure/databases/prisma/repositories/user'
 import { IOCModule } from '../common/ioc.module'
 import { CreateUserPresentation } from 'src/presentation/user/create-user.presentation'
+import { GetUserPresentation } from 'src/presentation/user/get-user.presentation'
 
 @Module({
   imports: [IOCModule],
@@ -36,6 +37,10 @@ import { CreateUserPresentation } from 'src/presentation/user/create-user.presen
     {
       provide: TYPES.CreateUserPresentation,
       useClass: CreateUserPresentation
+    },
+    {
+      provide: TYPES.GetUserPresentation,
+      useClass: GetUserPresentation
     }
   ]
 })

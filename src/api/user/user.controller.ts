@@ -22,8 +22,11 @@ export class UserController {
       ICreateUser,
       Promise<User>
     >,
-    @Inject(TYPES.GetUserService)
-    private readonly getUserService: IService<IGetUser, Promise<User>>,
+    @Inject(TYPES.GetUserPresentation)
+    private readonly getUserPresentation: IPresentation<
+      IGetUser,
+      Promise<User>
+    >,
     @Inject(TYPES.DeleteUserService)
     private readonly deleteUserService: IService<IDeleteUser, void>
   ) {}
@@ -43,7 +46,7 @@ export class UserController {
   @Get(':id')
   async getUser(@Param('id') id: string): Promise<User> {
     try {
-      return await this.getUserService.handler({ id })
+      return await this.getUserPresentation.handler({ id })
     } catch (error) {
       throw new HttpException(
         error.message,
