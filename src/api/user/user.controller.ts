@@ -9,7 +9,7 @@ import {
   Param,
   Post
 } from '@nestjs/common'
-import { IPresentation, IService } from 'src/domain/common/interfaces'
+import { IPresentation } from 'src/domain/common/interfaces'
 import { User } from 'src/domain/user/entities/user'
 import { ICreateUser, IDeleteUser, IGetUser } from 'src/domain/user/interfaces'
 import { TYPES } from 'src/infrastructure/crosscutting/types'
