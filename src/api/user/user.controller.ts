@@ -27,8 +27,11 @@ export class UserController {
       IGetUser,
       Promise<User>
     >,
-    @Inject(TYPES.DeleteUserService)
-    private readonly deleteUserService: IService<IDeleteUser, void>
+    @Inject(TYPES.DeleteUserPresentation)
+    private readonly deleteUserPresentation: IPresentation<
+      IDeleteUser,
+      Promise<void>
+    >
   ) {}
 
   @Post()
@@ -57,6 +60,6 @@ export class UserController {
 
   @Delete(':id')
   async deleteUser(@Param('id') id: string): Promise<void> {
-    this.deleteUserService.handler({ id })
+    this.deleteUserPresentation.handler({ id })
   }
 }
