@@ -1,6 +1,10 @@
 import { Module } from '@nestjs/common'
 import { UserController } from './user.controller'
-import { CreateUserService, GetUserService } from 'src/app/user'
+import {
+  CreateUserService,
+  GetUserService,
+  DeleteUserService
+} from 'src/app/user'
 import { TYPES } from 'src/infrastructure/crosscutting/types'
 import { UserRepository } from 'src/infrastructure/repositories/user'
 
@@ -20,6 +24,10 @@ import { UserRepository } from 'src/infrastructure/repositories/user'
     {
       provide: TYPES.GetUserService,
       useClass: GetUserService
+    },
+    {
+      provide: TYPES.DeleteUserService,
+      useClass: DeleteUserService
     }
   ]
 })
