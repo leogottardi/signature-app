@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpException,
   HttpStatus,
@@ -10,7 +11,7 @@ import {
 } from '@nestjs/common'
 import { IService } from 'src/domain/common/interfaces'
 import { User } from 'src/domain/user/entities/user'
-import { ICreateUser, IGetUser } from 'src/domain/user/interfaces'
+import { ICreateUser, IDeleteUser, IGetUser } from 'src/domain/user/interfaces'
 import { TYPES } from 'src/infrastructure/crosscutting/types'
 
 @Controller('users')
@@ -19,7 +20,9 @@ export class UserController {
     @Inject(TYPES.CreateUserService)
     private readonly createUserService: IService<ICreateUser, User>,
     @Inject(TYPES.GetUserService)
-    private readonly getUserService: IService<IGetUser, User>
+    private readonly getUserService: IService<IGetUser, User>,
+    @Inject(TYPES.DeleteUserService)
+    private readonly deleteUserService: IService<IDeleteUser, void>
   ) {}
 
   @Post()
@@ -37,5 +40,10 @@ export class UserController {
         error.code || HttpStatus.INTERNAL_SERVER_ERROR
       )
     }
+  }
+
+  @Delete(':id')
+  deleteUser(@Param('id') id: string): void {
+    this.deleteUserService.handler({ id })
   }
 }

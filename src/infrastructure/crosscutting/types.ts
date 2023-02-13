@@ -1,5 +1,6 @@
 export const TYPES = {
   UserRepository: Symbol.for('UserRepositry'),
   CreateUserService: Symbol.for('CreateUserService'),
-  GetUserService: Symbol.for('GetUserService')
+  GetUserService: Symbol.for('GetUserService'),
+  DeleteUserService: Symbol.for('DeleteUserService')
 }
