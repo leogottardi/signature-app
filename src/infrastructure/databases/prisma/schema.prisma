@@ -11,9 +11,9 @@ datasource db {
 }
 
 model Contract {
-  id String @db.Uuid @id  @default(uuid())
+  id String @db.Uuid @id @default(uuid())
   status String @db.VarChar(20)
-  subscribers Subscriber[]
+  subscriber Subscriber?
   created_at DateTime @db.Timestamp(0) @default(now())
   updated_at DateTime? @db.Timestamp(0)
 
@@ -25,7 +25,7 @@ model Subscriber {
   name String @db.VarChar(50)
   email String @db.VarChar(50) @unique
   document String @db.VarChar(20) @unique
-  contract_id String @db.Uuid 
+  contract_id String @db.Uuid @unique
   contract Contract @relation(fields: [contract_id], references: [id])
   created_at DateTime @db.Timestamp(0) @default(now())
   updated_at DateTime? @db.Timestamp(0)

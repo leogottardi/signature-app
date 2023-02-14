@@ -27,5 +27,8 @@ CREATE UNIQUE INDEX "subscriber_email_key" ON "subscriber"("email");
 -- CreateIndex
 CREATE UNIQUE INDEX "subscriber_document_key" ON "subscriber"("document");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "subscriber_contract_id_key" ON "subscriber"("contract_id");
+
 -- AddForeignKey
 ALTER TABLE "subscriber" ADD CONSTRAINT "subscriber_contract_id_fkey" FOREIGN KEY ("contract_id") REFERENCES "contract"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

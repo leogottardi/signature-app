@@ -11,4 +11,6 @@ export interface ICreateSubscriber {
    * @param document subscriber document (cpf/cnpj)
    */
   document: string
+
+  contract_id: string
 }

@@ -7,4 +7,5 @@ export interface IGetSubscriber {
    * @param document subscriber document
    */
   document?: string
+  email?: string
 }

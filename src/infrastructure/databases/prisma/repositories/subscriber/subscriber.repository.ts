@@ -20,11 +20,20 @@ export class SubscriberRepository implements ISubscriberRepository {
     return subscriber
   }
 
-  async get({ id, document }: IGetSubscriber): Promise<Subscriber> {
+  async get({ id, document, email }: IGetSubscriber): Promise<Subscriber> {
     return await this.connection.subscriber.findFirst({
       where: {
-        id,
-        document
+        OR: [
+          {
+            id
+          },
+          {
+            document
+          },
+          {
+            email
+          }
+        ]
       }
     })
   }

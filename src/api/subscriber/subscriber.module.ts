@@ -49,6 +49,7 @@ import { SubscriberRepository } from '@infrastructure/databases/prisma/repositor
       provide: TYPES.DeleteSubscriberPresentation,
       useClass: DeleteSubscriberPresentation
     }
-  ]
+  ],
+  exports: [TYPES.GetSubscriberService, TYPES.CreateSubscriberService]
 })
-export class UserModule {}
+export class SubscriberModule {}
